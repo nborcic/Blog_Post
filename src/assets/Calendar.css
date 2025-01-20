@@ -1,0 +1,28 @@
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  position: relative;
+}
+
+.day.booked {
+  background-color: #ffcccb;
+}
+
+.day.available {
+  background-color: #ccffcc;
+}
+
+.tooltip {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: #333;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+}

@@ -1,0 +1,29 @@
+/* Customize the event color */
+.fc-event {
+  background-color: #4caf50 !important; /* Custom green color */
+  color: white !important; /* Text color */
+  border: none !important; /* Remove border */
+  border-radius: 8px !important; /* Add rounded corners */
+}
+
+/* Change the background color of a day */
+.fc-daygrid-day {
+  background-color: #f9f9f9 !important; /* Light gray background */
+}
+
+/* Highlight the current day */
+.fc-day-today {
+  background-color: #e3f2fd !important; /* Light blue */
+  border: 2px solid #2196f3 !important; /* Add a blue border */
+}
+
+/* Change header font and background */
+.fc-toolbar-title {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+.fc-toolbar {
+  background-color: #f5f5f5 !important;
+  padding: 10px !important;
+}
