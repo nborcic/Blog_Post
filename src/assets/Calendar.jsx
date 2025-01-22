@@ -18,6 +18,7 @@ const Calendar = () => {
 
   // Handle booking
   const handleBooking = (date) => {
+    const newBooking = {};
     const name = prompt("Enter renter's name:");
     if (!name) return;
 

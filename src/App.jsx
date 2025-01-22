@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./assets/Navbar";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
       <Navbar />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
+      <ToastContainer />
     </div>
   );
 };
