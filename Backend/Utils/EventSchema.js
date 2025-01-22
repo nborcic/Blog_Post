@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-
 const eventSchema = new mongoose.Schema({
     title: { type: String, required: true },
     start: { type: Date, required: true },
@@ -15,7 +14,6 @@ const eventSchema = new mongoose.Schema({
         eventType: { type: String }
     }
 });
-
 
 const Event = mongoose.model('Event', eventSchema);
 

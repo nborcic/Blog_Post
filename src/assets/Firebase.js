@@ -3,8 +3,6 @@ import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 
-
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -14,10 +12,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-
 const app = initializeApp(firebaseConfig);
-
-
 
 const db = getFirestore(app);
 const auth = getAuth(app);

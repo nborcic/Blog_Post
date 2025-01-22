@@ -47,5 +47,6 @@ app.get("/", (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 5001;
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on ${process.env.BASEURL + PORT}`);
+    const baseURL = process.env.BASEURL || 'http://localhost:';
+    console.log(`Server running on ${baseURL + PORT}`);
 });
