@@ -8,7 +8,7 @@ import Calendar from "./assets/Calendar";
 import FullCalendarReact from "./assets/FullCalendarReact";
 import ErrorElement from "./assets/ErrorElement";
 import Login from "./assets/login";
-import Register from "./assets/register";
+import Register from "./assets/Register";
 import Dashboard from "./assets/Dashboard";
 
 const router = createBrowserRouter([

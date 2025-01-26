@@ -12,18 +12,25 @@ app.use(cors());
 mongooDB();
 
 // Routes
-app.use("api/reservations", Event);
+app.use("api/events", Event);
 app.use("api/profile", ProfileSchema);
 
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: "Server errorR" });
-});
 
-app.get("/api/reservations", async (req, res) => {
+app.get("/api/events", async (req, res) => {
     try {
         const reservation = await Event.find();
+        res.json(reservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+app.post("/api/events", async (req, res) => {
+    const newEvent = new Event(req.body);
+    try {
+        const reservation = await newEvent.save();
         res.json(reservation);
     } catch (error) {
         console.error(error);

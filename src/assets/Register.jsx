@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth, collection, db } from "./Firebase";
+import { auth, db } from "./Firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
@@ -70,6 +70,7 @@ const Register = () => {
           name="lname"
           value={lname}
           onChange={(e) => setLname(e.target.value)}
+          required
         />
       </div>
       <div>
