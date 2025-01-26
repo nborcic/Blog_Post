@@ -3,13 +3,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import Home from "./assets/Home";
-import Calendar from "./assets/Calendar";
-import FullCalendarReact from "./assets/FullCalendarReact";
-import ErrorElement from "./assets/ErrorElement";
-import Login from "./assets/login";
-import Register from "./assets/Register";
-import Dashboard from "./assets/Dashboard";
+import Home from "./Components/Home";
+import Calendar from "./Components/Calendar";
+import FullCalendarReact from "./Components/FullCalendarReact";
+import ErrorElement from "./Components/ErrorElement";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import Dashboard from "./Components/Dashboard";
+import AuthProvider from "../src/Assets/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <AuthProvider>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </AuthProvider>
 );

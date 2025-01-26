@@ -57,7 +57,7 @@ const Calendar = () => {
           contentHeight="auto"
           contentWidth="auto"
           height="auto"
-          width="auto"
+          
           allDaySlot={false}
           slotMinTime="07:00:00"
           slotMaxTime="24:00:00"

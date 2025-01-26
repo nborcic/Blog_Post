@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 import express from "express";
+import bodyParser from "body-parser";
+import cors from 'cors';
+
+
 
 const eventSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -18,7 +22,22 @@ const eventSchema = new mongoose.Schema({
 const Event = mongoose.model('Event', eventSchema);
 export default Event;
 
+const app = express();
+
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors());
 
 
+app.use("api/events", Event);
 
 
+app.get("/api/events", async (req, res) => {
+    try {
+        const reservation = await Event.find();
+        res.json(reservation);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+});

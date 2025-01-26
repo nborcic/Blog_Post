@@ -5,6 +5,7 @@ import ProfileSchema from "./Utils/ProfileSchema.js";
 import bodyParser from "body-parser";
 import cors from 'cors';
 
+
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
@@ -17,15 +18,7 @@ app.use("api/profile", ProfileSchema);
 
 
 
-app.get("/api/events", async (req, res) => {
-    try {
-        const reservation = await Event.find();
-        res.json(reservation);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Server error" });
-    }
-});
+
 
 app.post("/api/events", async (req, res) => {
     const newEvent = new Event(req.body);
