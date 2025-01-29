@@ -13,8 +13,6 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user);
-
       setGuser(user);
     } else {
       setGuser("");

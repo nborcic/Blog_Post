@@ -80,6 +80,7 @@ const Register = () => {
           id="email"
           name="email"
           value={email}
+          autoComplete="current-password"
           onChange={(e) => setEmail(e.target.value)}
           required
         />
@@ -87,10 +88,11 @@ const Register = () => {
       <div>
         <label htmlFor="password">Password:</label>
         <input
-          type="password"
+          type="text"
           id="password"
           name="password"
           value={password}
+          autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
           required
         />

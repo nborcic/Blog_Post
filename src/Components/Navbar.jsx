@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "./Firebase";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const user = auth.currentUser;
@@ -14,23 +15,31 @@ const Navbar = () => {
               <button>
                 <Link to={"/login"}>Login</Link>
               </button>
-              <button>
-                <Link to="/register">Register</Link>
-              </button>
             </>
           ) : (
             ""
           )}
           {user ? (
-            <button>
-              <Link to="/dashboard">Dashboard</Link>
-            </button>
+            <>
+              <button>
+                <Link to="/dashboard">Dashboard</Link>
+              </button>
+              <button>
+                <Link to="/register">Make User</Link>
+              </button>
+            </>
           ) : (
             ""
           )}
         </div>
 
         <ul className="flex space-x-4">
+          {user && (
+            <>
+              <motion.button className="w-2 h-2 bg-red-500 text-white rounded-full  absolute right-5 top-2 animate-pulse" />
+            </>
+          )}
+
           <button className="text-white">
             <Link to="/">Home</Link>
           </button>
