@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "./Firebase";
+import { auth } from "../Assets/Firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "./Firebase";
+import { db } from "../Assets/Firebase";
 import { useNavigate } from "react-router-dom";
-
-
+import { useAuth } from "../Assets/AuthProvider";
 const Dashboard = () => {
   const [profile, setProfile] = useState(null);
+  const { authLoading } = useAuth();
   const navigate = useNavigate();
 
   const user = auth.currentUser;
 
+  if (authLoading) {
+    return <Spinner />;
+  }
   const fetchProfile = async () => {
     auth.onAuthStateChanged(async (user) => {
       if (!user) {
-        navigate("/login");
         return;
       }
       const docRef = doc(db, "users", user.uid);
@@ -62,7 +64,6 @@ const Dashboard = () => {
           ""
         )}
       </div>
-     
     </>
   );
 };

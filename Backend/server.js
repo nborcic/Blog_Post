@@ -9,10 +9,14 @@ import cors from 'cors';
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: '*'
+    }
+));
 mongooDB();
 
-// Routes
+
 app.use("api/events", Event);
 app.use("api/profile", ProfileSchema);
 
@@ -38,6 +42,18 @@ app.post("/api/events", async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
+app.delete("/api/events", async (req, res) => {
+    const { id } = req.body;
+    try {
+        const event = await Event.findByIdAndDelete(id);
+        console.log(event);
+
+        res.json(event);
+    } catch (error) {
+
+        res.json("error deleting id ")
+    }
+});
 
 app.get("/api/profile", async (req, res) => {
     try {
@@ -52,7 +68,7 @@ app.get("/api/profile", async (req, res) => {
 app.get("/", (req, res) => {
     res.send("API is running...");
 });
-// Start the server
+
 const PORT = process.env.PORT || 5001;
 app.listen(process.env.PORT, () => {
     const baseURL = process.env.BASEURL || 'http://localhost:';

@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth, db } from "./Firebase";
+import { auth, db } from "../Assets/Firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
@@ -17,8 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if the required fields are not empty
-    if (!email || !password || !fname || !lname) {
+      if (!email || !password || !fname || !lname) {
       toast.error("Please fill all fields!", { position: "bottom-center" });
       return;
     }

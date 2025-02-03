@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 
 const Home = () => {
   return (
@@ -7,7 +7,7 @@ const Home = () => {
       <h1 className="text-6xl">Welcome to Home Page</h1>
       <h1>Home and Blog site with details are in progress</h1>
       <Link
-        to="/calendar"
+        to="/dashboard/fullcalendar"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-xl p-4"
       >
         Explore calendar options

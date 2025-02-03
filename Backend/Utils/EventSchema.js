@@ -12,8 +12,6 @@ const eventSchema = new mongoose.Schema({
     description: { type: String },
     location: { type: String },
     allDay: { type: Boolean, default: false },
-    backgroundColor: { type: String },
-    textColor: { type: String },
     extendedProps: {
         roomNumber: { type: String },
         eventType: { type: String }

@@ -1,45 +1,67 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import React, { createContext, useState, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    //console.log("Current token state", localStorage.getItem("token"));
-    return localStorage.getItem("token") !== null;
-  });
-  const [guser, setGuser] = useState("");
-
+export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setGuser(user);
-    } else {
-      setGuser("");
-    }
-  });
 
-  const login = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-    return;
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false);
-  };
-
-  return (
-    <AuthContext.Provider
-      future={{ v7_partialHydration: true }}
-      value={{ isAuthenticated, login, logout, guser }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const login = useCallback(
+    async (email, password) => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+       
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    },
+    [auth]
   );
+
+  const logout = useCallback(async () => {
+    try {
+      await signOut(auth);
+     
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }, [auth]);
+
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      authLoading,
+      login,
+      logout,
+    }),
+    [isAuthenticated, authLoading, login, logout]
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-export default AuthProvider;
+
 export const useAuth = () => useContext(AuthContext);
+
+export default AuthProvider;
