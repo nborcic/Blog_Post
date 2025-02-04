@@ -17,11 +17,7 @@ const Calendar = ({ selectInfo, formData }) => {
   const { authLoading } = useAuth();
 
   if (authLoading) {
-    return (
-      <div className="w-32 h-24">
-        <Spinner />
-      </div>
-    );
+    return <Spinner />;
   }
 
   const handleDateSelect = (selectInfo) => {

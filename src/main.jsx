@@ -12,7 +12,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Dashboard from "./Components/Dashboard";
 import AuthProvider from "../src/Assets/AuthProvider";
-
+import { Flowbite } from "flowbite-react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,8 +37,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <Flowbite>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </Flowbite>
   </AuthProvider>
 );

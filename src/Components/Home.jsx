@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
   return (
-    <div className="flex flex-col gap-6 justify-center items-center text-4xl">
+    <div className="flex flex-col gap-6 justify-center items-center text-4xl h-screen w-screen dark:bg-gray-200">
       <h1 className="text-6xl">Welcome to Home Page</h1>
       <h1>Home and Blog site with details are in progress</h1>
       <Link

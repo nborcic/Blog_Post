@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button, Label, TextInput, Textarea } from "flowbite-react";
+import { Link } from "react-router";
 
 const Register = () => {
   const [fname, setFname] = useState("");
@@ -17,7 +19,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      if (!email || !password || !fname || !lname) {
+    if (!email || !password || !fname || !lname) {
       toast.error("Please fill all fields!", { position: "bottom-center" });
       return;
     }
@@ -49,56 +51,67 @@ const Register = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="fname">First Name:</label>
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          value={fname}
-          onChange={(e) => setFname(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="lname">Last Name:</label>
-        <input
-          type="text"
-          id="lname"
-          name="lname"
-          value={lname}
-          onChange={(e) => setLname(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          autoComplete="current-password"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="text"
-          id="password"
-          name="password"
-          value={password}
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Register</button>
-      {error ? <p className="text-red-500 flex-wrap">{error}</p> : ""}
-    </form>
+    <div className="w-screen h-screen flex items-start justify-center ">
+      <form
+        onSubmit={handleSubmit}
+        className="flex max-w-2xl flex-col gap-4 w-[40%] shadow-xl p-4"
+      >
+        <h2 className="text-4xl">Create new Admin</h2>
+        <div className="max-w-2xl">
+          <div className="mb-2 block">
+            <Label htmlFor="username3" value="Username" />
+          </div>
+          <TextInput
+            id="username3"
+            placeholder="Bonnie Green"
+            addon=""
+            required
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="email2" value="Your email" />
+          </div>
+          <TextInput
+            id="email2"
+            type="email"
+            placeholder="name@flowbite.com"
+            required
+            shadow
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password2" value="Your password" />
+          </div>
+          <TextInput id="password2" type="password" required shadow />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="repeat-password" value="Repeat password" />
+          </div>
+          <TextInput id="repeat-password" type="password" required shadow />
+        </div>
+        <div className="max-w-md">
+          <div className="mb-2 block">
+            <Label htmlFor="comment" value="Your message" />
+          </div>
+          <Textarea
+            id="comment"
+            placeholder="Leave a comment..."
+            required
+            rows={4}
+          />
+        </div>
+
+        <Button
+          className="flex justify-center items-center text-black"
+          type="submit"
+        >
+          Register new account
+        </Button>
+      </form>
+    </div>
   );
 };
 

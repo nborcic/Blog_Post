@@ -4,20 +4,26 @@ import { fetchEvents, handleDeleteEvent } from "../Assets/Utils.js";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
+  const handleEvent = async (id) => {
+    try {
+      handleDeleteEvent("http://localhost:5001/api/events/", "DELETE", {
+        id,
+      }).then((response) => {
+        if (response._id) {
+          const filteredE = events.filter((e) => e._id !== response._id);
+          setEvents(filteredE);
+        }
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     fetchEvents("http://localhost:5001/api/events/").then((events) => {
       setEvents(events);
     });
   }, []);
-  const handleEvent = async (id) => {
-    handleDeleteEvent("http://localhost:5001/api/events/", "DELETE", {
-      id,
-    }).then((response) => {
-      if (response._id) {
-        setEvents(events.filter((event) => event._id !== response._id));
-      }
-    });
-  };
 
   return (
     <div>
@@ -35,7 +41,7 @@ const EventList = () => {
                     className="p-4 border rounded shadow transition duration-200 hover:bg-gray-50 hover:shadow-lg hover:scale-105 flex flex-col items-start min-w-[200px]"
                   >
                     <h3 className="text-xl font-semibold">
-                      {event.title}
+                      {event.title || "No title"}
                       <span
                         onClick={(e) => handleEvent(event._id)}
                         className="text-sm font-normal text-gray-500 hover:text-red-500 cursor-pointer"
@@ -44,22 +50,24 @@ const EventList = () => {
                         X
                       </span>
                     </h3>
-                    <p className="mt-1">{event.description}</p>
+                    <p className="mt-1">
+                      {event.description || "No description"}
+                    </p>
                     <p className="mt-1">
                       <span className="font-semibold">Start:</span>{" "}
-                      {event.start}
+                      {event.start || "No Start"}
                     </p>
                     <p className="mt-1">
                       <span className="font-semibold">Location:</span>{" "}
-                      {event.location}
+                      {event.location || "No location"}
                     </p>
                     <p className="mt-1">
                       <span className="font-semibold">Room Number:</span>{" "}
-                      {event.roomNumber}
+                      {event.roomNumber || "No roomNumber"}
                     </p>
                     <p className="mt-1">
                       <span className="font-semibold">Event Type:</span>{" "}
-                      {event.eventType}
+                      {event.eventType || "No eventType"}
                     </p>
                     <p className="mt-1">
                       <span className="font-semibold">All Day:</span>{" "}

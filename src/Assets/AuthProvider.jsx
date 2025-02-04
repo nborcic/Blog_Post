@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
+import { ThemeModeScript } from "flowbite-react";
 import {
   getAuth,
   onAuthStateChanged,
@@ -32,7 +33,6 @@ export const AuthProvider = ({ children }) => {
     async (email, password) => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-       
       } catch (error) {
         console.error("Login failed:", error);
       }
@@ -43,7 +43,6 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       await signOut(auth);
-     
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -59,6 +58,7 @@ export const AuthProvider = ({ children }) => {
     [isAuthenticated, authLoading, login, logout]
   );
 
+  
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

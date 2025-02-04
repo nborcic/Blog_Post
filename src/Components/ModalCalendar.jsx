@@ -10,7 +10,6 @@ export function Component({ isOpen, onClose, onSubmit }) {
     description: "",
     location: "",
     allDay: false,
-
     roomNumber: "",
     eventType: "",
   });
@@ -101,7 +100,7 @@ export function Component({ isOpen, onClose, onSubmit }) {
                     type="text"
                     name="roomNumber"
                     placeholder="Room number 1-4"
-                    value={formData.roomNumber}
+                    value={formData.roomNumber || "1-3"}
                     onChange={handleInputChange}
                     className="w-full p-2 border rounded"
                     required

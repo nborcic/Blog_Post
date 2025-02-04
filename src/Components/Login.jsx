@@ -41,7 +41,7 @@ const LoginForm = () => {
 
   return (
     <section className="bg-gray-100 dark:bg-gray-900  h-screen w-screen z-1000">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-start px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
