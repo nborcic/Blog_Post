@@ -84,8 +84,9 @@ const Dashboard = () => {
                       </p>
                     </div>
                     <div className="flex items-center dark:text-white">
-                      {auth.currentUser.uid}
-                      {auth.currentUser.emailVerified}
+                      <p>ID start: &nbsp; </p>{" "}
+                      {auth.currentUser.uid.slice(1, 10)}
+                      {auth.currentUser.emailVerified ? "Verified" : "Not Verified"}
                     </div>
                   </div>
                 </List.Item>
