@@ -1,5 +1,9 @@
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-const VITE_LOCAL_URL = import.meta.env.VITE_LOCAL_URL;
+export function cn(...inputs) {
+    return twMerge(clsx(inputs))
+}
 
 export const fetchEvents = async (link) => {
     const response = await fetch(`http://localhost:5001/api/events/`);

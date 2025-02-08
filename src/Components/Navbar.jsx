@@ -13,7 +13,7 @@ const Navbar = () => {
     return <Spinner />;
   }
   return (
-    <div className="w-full max-w-[1440px] dark:bg-gray-200">
+    <div className="w-full max-w-[1440px] dark:bg-gray-200 rounded-xl">
       <nav className="h-[4.5rem] w-[100%] rounded-md  bg-blue-500 mx-auto flex items-center text-xl text-[1.2em] justify-between px-4">
         <div className="text-white font-bold flex gap-4">
           <p>Put logo here</p>
