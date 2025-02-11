@@ -5,14 +5,48 @@ import { reviews } from "./magicui/Marqueee";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useState } from "react";
 
 const Home = () => {
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState("");
+
   const firstRow = reviews.slice(0, reviews.length / 2);
   const secondRow = reviews.slice(reviews.length / 2);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setSubscribeStatus("");
+
+    try {
+      const response = await fetch("http://localhost:5001/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubscribeStatus("Successfully subscribed!");
+        setEmail("");
+      } else {
+        setSubscribeStatus(
+          data.message || "Subscription failed. Please try again."
+        );
+      }
+    } catch (error) {
+      setSubscribeStatus("Something went wrong. Please try again later.");
+      console.error("Subscription error:", error);
+    }
+  };
+
   return (
     <>
       <section
-        className="h-[90dvh] w-screen max-w-[1440px] flex items-center justify-center bg-cover bg-center text-white text-center relative rounded-xl"
+        className="  h-[90dvh] w-screen max-w-[1440px] flex items-center justify-center bg-cover bg-center text-white text-center relative rounded-xl"
         style={{
           backgroundImage:
             'url("https://images.unsplash.com/photo-1613553507747-5f8d62ad5904?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80")',
@@ -33,7 +67,7 @@ const Home = () => {
           </button>
         </div>
       </section>
-      <section className="max-w-[1440px] my-40  py-20 rounded-xl">
+      <section className="  max-w-[1440px] my-40  py-20 rounded-xl">
         <h2 className="text-4xl sm:text-5xl mb-12 text-center bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] text-transparent bg-clip-text">
           Testimonials
         </h2>
@@ -94,8 +128,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className=" py-20 bg-white  max-w-[1400px] mx-auto">
-        <div className="max-w-[1400px] mx-auto">
+      <section className=" py-20 bg-white  max-w-[1440px] rounded-xl">
+        <div className=" ">
           <div className="flex gap-4 h-[600px] md:flex-row flex-col">
             {["Master Suite", "Garden View", "Ocean Suite", "Tech Suite"].map(
               (room, index) => (
@@ -142,6 +176,120 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <footer className="bg-gray-900 text-white py-16 rounded-xl max-w-[1440px]">
+        <div className="max-w-[1440px] w-full  ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Contact Information */}
+            <div className="pl-4">
+              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] bg-clip-text text-transparent">
+                Contact Us
+              </h3>
+              <ul className="space-y-2">
+                <li>📍 123 Luxury Avenue</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>✉️ info@luxuryvilla.com</li>
+                <li>🌍 Paradise Island, PC 12345</li>
+              </ul>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] bg-clip-text text-transparent">
+                Quick Links
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#00f7ff] transition-colors"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#00f7ff] transition-colors"
+                  >
+                    Our Rooms
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#00f7ff] transition-colors"
+                  >
+                    Amenities
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#00f7ff] transition-colors"
+                  >
+                    Book Now
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] bg-clip-text text-transparent">
+                Services
+              </h3>
+              <ul className="space-y-2">
+                <li>24/7 Concierge</li>
+                <li>Spa & Wellness</li>
+                <li>Fine Dining</li>
+                <li>Private Beach Access</li>
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div className="pr-4">
+              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] bg-clip-text text-transparent">
+                Newsletter
+              </h3>
+              <p className="mb-4">Subscribe for exclusive offers and updates</p>
+              <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="bg-gray-800 px-4 py-2 rounded-lg flex-grow text-white"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-gradient-to-r from-[#00f7ff] to-[#ff00e6] rounded-lg hover:opacity-90 transition-opacity"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+                {subscribeStatus && (
+                  <p
+                    className={`text-sm ${
+                      subscribeStatus.includes("Successfully")
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    {subscribeStatus}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>© 2024 Luxury Villa. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };
