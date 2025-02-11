@@ -24,7 +24,7 @@ export function Component({ isOpen, onClose, onSubmit }) {
 
   const handleDateSelect = (e) => {
     e.preventDefault();
-    onSubmit(formData); 
+    onSubmit(formData);
     setFormData({
       title: "",
       start: "",
